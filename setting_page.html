@@ -1,0 +1,230 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pong pong</title>
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+<body style="background-color:  #ff9478">
+
+
+<div class="container-fluid">
+
+
+    <div class="row m-5">
+        <div class="col-md-2">
+            <button onclick="backToHome()" class="btn btn-outline-dark btnFont"><i class="fas fa-arrow-circle-left"></i>
+                BACK
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card " style="background-color: #24252a">
+                <div class="card-body">
+
+                    <div class="alert alert-success btnFont" role="alert" id="alert_message">
+                        <i class="fas fa-bell"></i> CONFIGURATIONS SAVED SUCCESSFULLY !!
+                    </div>
+                    <div class="text text-center">
+                        <h2 class="btnFont" style="color: #ff9478"><i
+                                class="fas fa-sliders-h"></i> GAME SETTINGS
+                        </h2>
+
+
+                        <h5 class="text text-left btnFont m-5" style="color: #ff9478">Game sound volume</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-success" onclick="increaseVolume()"><i
+                                        class="fas fa-volume-up"></i></button>
+                            </div>
+                            <div class="col-md-4">
+                                <h4 id="volume_val" class="btnFont" style="color: #ff9478 ; font-size: 20px;">0.3</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-danger" onclick="decreaseVolume()"><i
+                                        class="fas fa-volume-down"></i></button>
+
+                            </div>
+                        </div>
+
+                        <h5 class="text text-left btnFont m-5" style="color: #ff9478">GAME LEVEL</h5>
+
+                        <div class="row ml-2">
+
+
+                            <div class="col-md-12 m-5">
+                                <label class="container">Normal
+                                    <input type="radio" name="radio" id="normal">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">Fast
+                                    <input type="radio" name="radio" id="fast">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">Faster
+                                    <input type="radio" name="radio" checked id="faster">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <button class="btn btn-outline-dark btnFont btn-block " onclick="saveConfig()"
+                                    style="color: #ff9478">SAVE CHANGES
+                            </button>
+
+                            <button class="btn btn-outline-dark btn-block btnFont" onclick="reset()" style="color: #ff9478" >RESET</button>
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="js/services/game_configrations.js"></script>
+
+<script>
+
+    //visible
+    //alert_message
+    var snd = new Audio("sounds/background.mp3");
+    snd.autoplay
+    snd.volume = 0.3;
+
+    snd.loop = true;
+
+    document.body.addEventListener("mousemove", function () {
+        snd.play().then(() => {
+        });
+    })
+
+    document.getElementById("alert_message").style.visibility = "hidden";
+
+
+    getLastConfigData();
+
+
+
+    function reset() {
+        setConfigurations(0.3, 0);
+        document.getElementById('volume_val').innerHTML="0.3";
+        document.getElementById('fast').checked = false;
+        document.getElementById('faster').checked = false;
+        document.getElementById('normal').checked = true;
+
+    }
+    function getLastConfigData() {
+
+
+        if (getVolume() !== null) {
+            document.getElementById('volume_val').innerHTML = getVolume();
+        }
+        switch (getLevel()) {
+            case  "0" :
+                document.getElementById('fast').checked = false;
+                document.getElementById('faster').checked = false;
+                document.getElementById('normal').checked = true;
+                break;
+            case  "1" :
+                document.getElementById('fast').checked = true;
+                document.getElementById('faster').checked = false;
+                document.getElementById('normal').checked = false;
+                break;
+            case  "2" :
+                document.getElementById('fast').checked = false;
+                document.getElementById('faster').checked = true;
+                document.getElementById('normal').checked = false;
+                break;
+
+            default :
+                document.getElementById('fast').checked = false;
+                document.getElementById('faster').checked = false;
+                document.getElementById('normal').checked = true;
+        }
+    }
+
+
+    function backToHome() {
+        window.close();
+        window.open('./main_page.html');
+    }
+
+
+    //increaseVolume
+    function increaseVolume() {
+        let value = parseFloat(document.getElementById('volume_val').innerHTML);
+        if (value > 0.0 && value < 0.7) {
+            value = value + 0.1;
+            document.getElementById('volume_val').innerHTML = value;
+        }
+    }
+
+
+    //decreaseVolume
+    function decreaseVolume() {
+        let value = parseFloat(document.getElementById('volume_val').innerHTML);
+        console.log("decrease val")
+        if (value > 0.3) {
+            value = value - 0.1;
+            document.getElementById('volume_val').innerHTML = value;
+        }
+    }
+
+    // save previous setting
+    function saveConfig() {
+        let volume = parseFloat(document.getElementById('volume_val').innerHTML);
+        let fast = document.getElementById('fast').checked;
+        let faster = document.getElementById('faster').checked;
+        let normal = document.getElementById('normal').checked;
+        if (fast) {
+            setConfigurations(volume, 1);
+            changeMessageVisibility();
+        } else if (faster) {
+            setConfigurations(volume, 2);
+            changeMessageVisibility();
+        } else if (normal) {
+            setConfigurations(volume, 0);
+            changeMessageVisibility();
+        }
+    }
+
+    //changeMessageVisibility
+    function changeMessageVisibility() {
+        document.getElementById("alert_message").style.visibility = "visible";
+        setTimeout(function () {
+            document.getElementById("alert_message").style.visibility = "hidden";
+
+        }, 1500);
+    }
+
+</script>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,246 @@
+<html lang="ar">
+<head>
+    <title>Ping Pong Game</title>
+
+    <link rel="stylesheet" href="css/style.css"/>
+
+
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+
+<body style="background-color:  #ff9478">
+
+
+<div class="container-fluid">
+
+    <div class="row m-5">
+        <div class="col-md-2">
+            <button onclick="backToHome()" class="btn btn-outline-dark btnFont"><i class="fas fa-arrow-circle-left"></i>
+                BACK
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <div class="row" id="game_card">
+
+
+        <div class="col-md-3">
+
+            <div class="row mt-3">
+
+
+                <div class="col-md-12">
+                    <div class="card " style="background-color: #24252a">
+                        <div class="card-body">
+                            <div class="text text-center">
+
+
+                                <div class="row">
+                                    <h4 style="color: #ff9478" class="btnFont">PLAYER : A</h4>
+                                </div>
+                                <div class="row">
+
+                                    <h4 class="m-1" style="color: #ff9478"><i class="fas fa-user-astronaut"
+                                                                              style="color: white"></i> SCORE : </h4>
+                                    <h4 id="player_a_score"
+                                        class="btnFont m-1"
+                                        style="color: #ff9478">
+                                        score</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-1">
+                </div>
+
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-md-12">
+                    <div class="card " style="background-color: #24252a">
+                        <div class="card-body">
+
+                            <div class="text text-center">
+
+
+                                <div class="row ml-5 mr-5">
+
+                                    <p CLASS="btnFont" style="color: white"><i class="fas fa-keyboard"></i> USE KEY
+                                        <span style="color: #ff9478">[A]</span> TO MOVE PADDLE UP AND <span
+                                                style="color: #ff9478">[Z]</span> TO MOVE DOWN</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 ">
+            <div id="main">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="row mt-3">
+
+
+                <div class="col-md-12">
+                    <div class="card " style="background-color: #24252a">
+                        <div class="card-body">
+                            <div class="text text-center">
+
+                                <div class="row">
+                                    <h4 style="color: #ff9478" class="btnFont">PLAYER : B</h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="m-1" style="color: #ff9478"><i class="fas fa-user-astronaut"
+                                                                              style="color: azure"></i> SCORE : </h4>
+                                    <h4 id="player_b_score"
+                                        class="btnFont m-1"
+                                        style="color: #ff9478">
+                                        score</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-1">
+                </div>
+
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-md-12">
+                    <div class="card " style="background-color: #24252a">
+                        <div class="card-body">
+
+                            <div class="text text-center">
+
+                                <div class="row ml-5 mr-5">
+
+                                    <p CLASS="btnFont" style="color: white"><i class="fas fa-keyboard"></i> USE KEY
+                                        <span style="color: #ff9478">[K]</span> TO MOVE PADDLE UP AND <span
+                                                style="color: #ff9478">[M]</span> TO MOVE DOWN</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" id="winner_card">
+
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body" style="background-color: #24252a">
+                    <div class="text text-center m-3">
+                        <h2><i class="fas fa-trophy" style="color: gold"></i></h2>
+                        <h4 id="winner" style="color: #ff9478"></h4><br>
+                        <button class="btn btn-outline-dark btnFont " style="color: #ff9478" onclick="playAgain()"><i class="fas fa-undo-alt"></i> PLAY
+                            AGAIN
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--<div id="setting" style=" background-color: #24252a; border-radius: 50px; padding: 20px">-->
+
+<!--    <div style="display: inline-block">-->
+
+<!--        <h3>Score : <span id="score"></span></h3>-->
+
+<!--    </div>-->
+<!--    <h1 style="color: white"> SETTING</h1>-->
+<!--    <label class="container">Normal-->
+<!--        <input type="radio" checked="checked" name="radio" id="normal">-->
+<!--        <span class="checkmark"></span>-->
+<!--    </label>-->
+<!--    <label class="container">Fast-->
+<!--        <input type="radio" name="radio" id="fast">-->
+<!--        <span class="checkmark"></span>-->
+<!--    </label>-->
+<!--    <label class="container">Faster-->
+<!--        <input type="radio" name="radio" id="faster">-->
+<!--        <span class="checkmark"></span>-->
+<!--    </label>-->
+
+<!--    <div style="display:inline-block">-->
+<!--        <button class="button button3" onclick="setBallSpeed()">Save</button>-->
+<!--        <button class="button button2" onclick="window.location.href='http://localhost:63342/PONG_PROJECT/index.html'">-->
+<!--            Reset-->
+<!--        </button>-->
+<!--        <button class="button button1" onclick="puse()">Pause</button>-->
+<!--        <button class="button button4" onclick="StartTheGame()">Start</button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div style="background-color: rebeccapurple ; margin-left: 61%">-->
+<!--<button onclick="increase(5)">Normal</button>-->
+<!--<button onclick="increase(10)">Fast</button>-->
+<!--<button onclick="increase(15)">Faster</button>-->
+<!--<button onclick="increase(20)">God Mode</button>-->
+
+<!--<button onclick="restartGame()">Reset</button>-->
+
+
+<!--</div>-->
+
+<script type="text/javascript"
+        src="js/pong_multi_player.js">
+</script>
+
+
+<script src="js/services/game_configrations.js"></script>
+
+
+<script>
+
+    StartTheGame();
+
+    function backToHome() {
+        window.close();
+        window.open('./main_page.html');
+    }
+
+
+    // document.getElementById('setting').style.marginLeft="70%";
+    // document.getElementById("myDiv").style.marginTop = "50px";
+
+</script>
+</body>
+</html>

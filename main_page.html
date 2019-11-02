@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pong pong</title>
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+
+<body style="background-color:  #ff9478">
+
+
+<div class="container-fluid">
+
+
+    <div class="row mt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card " style="background-color: #24252a">
+                <div class="card-body">
+                    <div class="text text-center">
+                        <h2 class="btnFont" style="color: #ff9478"><i class="fas fa-volleyball-ball"></i> Ping Pong Game
+                        </h2>
+
+                        <div class="row m-5">
+                            <div class="col-md-12">
+                                <button class="btn  btn-outline-dark btn-block btnFont "
+                                        onclick="goToMultiplesPlayerGame()" style="color: #ff9478"><i
+                                        class="fas fa-gamepad"></i> <i class="fas fa-gamepad"></i> MULTI PLAYER
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row m-5">
+                            <div class="col-md-12">
+                                <button onclick="goToWithComputerGame()" class="btn  btn-outline-dark btn-block btnFont"
+                                        style="color: #ff9478"><i
+                                        class="fas fa-robot"></i> WITH COMPUTER
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row m-5">
+                            <div class="col-md-12">
+                                <button onclick="goToSetting()" class="btn  btn-outline-dark btn-block btnFont "
+                                        style="color: #ff9478"><i
+                                        class="fas fa-sliders-h"></i> SETTING
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+<script src="js/services/game_configrations.js"></script>
+
+<script>
+    //set init config
+    // setConfigurations("0.3", 0);
+
+
+    var snd = new Audio("sounds/background.mp3");
+    snd.autoplay
+    snd.volume = 0.3;
+
+    snd.loop = true;
+
+    document.body.addEventListener("mousemove", function () {
+        snd.play().then(() => {
+        });
+    })
+
+
+    function goToSetting() {
+        window.close();
+        window.open('./setting_page.html');
+    }
+
+
+    //goToMultiplesPlayerGame
+
+
+    function goToMultiplesPlayerGame() {
+        window.close();
+        window.open('./with_muli_player_index.html');
+    }
+
+
+    function goToWithComputerGame() {
+        window.open('./with_computer_index.html');
+    }
+
+
+</script>
+
+</html>
