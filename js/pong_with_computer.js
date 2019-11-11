@@ -1,8 +1,13 @@
 var height = 500;
 var width = 800;
 var currentSpeed = 4;
+var  lastCurrentSpeed=4;
 var ball_x_velocity = currentSpeed;
 var ball_y_velocity = currentSpeed;
+
+
+var last_ball_x_velocity = currentSpeed;
+var last_ball_y_velocity = currentSpeed;
 mouse = {}
 var paddle_width = 10;
 var paddle_height = 10;
@@ -14,6 +19,52 @@ let $bestScore = document.getElementById('best_score');
 
 
 //best_score
+
+
+function fast() {
+    currentSpeed=4;
+
+
+    this.ball_x_velocity = currentSpeed;
+    this.ball_y_velocity = currentSpeed;
+
+    gameBall.velocity = {x: ball_x_velocity, y: ball_y_velocity};
+
+    Timer.clearTimer();
+    // restartGame();
+
+}
+function normal() {
+    currentSpeed=2;
+
+
+    this.ball_x_velocity = currentSpeed;
+    this.ball_y_velocity = currentSpeed;
+
+    gameBall.velocity = {x: ball_x_velocity, y: ball_y_velocity};
+
+    Timer.clearTimer();    // restartGame();
+
+
+}
+function faster() {
+    currentSpeed=8;
+
+
+    this.ball_x_velocity = currentSpeed;
+    this.ball_y_velocity = currentSpeed;
+
+    gameBall.velocity = {x: ball_x_velocity, y: ball_y_velocity};
+
+    Timer.clearTimer();    // restartGame();
+
+}
+
+
+
+
+
+
 
 function gameInit() {
 
@@ -59,30 +110,30 @@ function gameInit() {
 
 
 
-    document.body.addEventListener('mousemove',function (e) {
-        // console.log('X axis'+e.pageX)
-        // console.log('Y axis'+e.pageY)
-        // //
-        // // leftPaddle.move(e.pageY);
-        // //
-
-
-        if (leftPaddle.y<e.pageY)
-        {
-            console.log('down');
-            leftPaddle.move(10);
-
-        }else {
-            leftPaddle.move(-10);
-
-            console.log('up');
-
-        }
-
-        leftPaddle.y=e.pageY;
-
-
-    })
+    // document.body.addEventListener('mousemove',function (e) {
+    //     // console.log('X axis'+e.pageX)
+    //     // console.log('Y axis'+e.pageY)
+    //     // //
+    //     // // leftPaddle.move(e.pageY);
+    //     // //
+    //
+    //
+    //     if (leftPaddle.y<e.pageY)
+    //     {
+    //         console.log('down');
+    //         leftPaddle.move(10);
+    //
+    //     }else {
+    //         leftPaddle.move(-10);
+    //
+    //         console.log('up');
+    //
+    //     }
+    //
+    //     leftPaddle.y=e.pageY;
+    //
+    //
+    // })
 
 
 }
@@ -115,8 +166,8 @@ function Separator(position,
     for (i = 0; i < nodash; i++) {
         dash = new CreateObject(
             {
-                x: 0, y: i * 2 * object.s.height /
-                    (2 * nodash)
+                x: 0, y: i  * object.s.height /
+                    (nodash)
             }, {
                 height: 15, width: size.width
             }, "#ff9478");
@@ -142,39 +193,46 @@ function GameBall(position,
         this.play = 0;
 
 
-        console.log("gameBall x" + this.position.x);
+        // console.log("gameBall x" + this.position.x);
 
 
         let newP = this.position;
-        console.log("gameBall y" + newP.y);
+        // console.log("gameBall y" + newP.y);
         rightPaddle.move(newP.y);
 
 
         if (this.position.x + this.radius >
             parseInt(this.parentNode.style.width)) {
             this.play = 1;
-            console.log("hit " + this.play)
+            console.log("hit r wall" + this.play)
 
         }
 
         if (this.position.x < 0) {
             this.play = 2;
-            console.log("hit " + this.play)
+            console.log("hit left " + this.play)
 
         }
 
 
+
+
+
+
+        // upper zero
         if (this.position.y + this.radius >
             parseInt(this.parentNode.style.height)) {
 
             this.velocity.y = -this.velocity.y;
-            console.log("hit " + this.play)
+            console.log("hit y on the bottom " + this.play)
 
         }
 
+
+        //under zero
         if (this.position.y < 0) {
             this.velocity.y = -this.velocity.y;
-            console.log("hit " + this.play)
+            console.log("hit y on the top " + this.play)
 
         }
 
@@ -202,6 +260,10 @@ function Paddle(position, size, computer) {
     object.hit = function (gameBall) {
         if (((gameBall.position.x + gameBall.radius) >= this.position.x) &&
             (gameBall.position.x <= (this.position.x + this.s.width))) {
+
+
+
+
 
             if (gameBall.position.y >= this.position.y &&
                 gameBall.position.y <= (this.position.y + this.s.height)) {
@@ -289,12 +351,35 @@ function paddleUiUpdate(e) {
 }
 
 
+function stop(){
+
+
+    this.ball_x_velocity = 0;
+    this.ball_y_velocity = 0;
+    gameBall.velocity = {x: ball_x_velocity, y: ball_y_velocity};
+
+    timer.clearTimer();
+
+}
+function resume(){
+
+
+    this.ball_x_velocity = last_ball_x_velocity;
+    this.ball_y_velocity = last_ball_y_velocity;
+
+    gameBall.velocity = {x: ball_x_velocity, y: ball_y_velocity};
+
+    Timer.clearTimer();
+
+}
+
 restartGame = function () {
 
     this.ball_x_velocity = currentSpeed;
     this.ball_y_velocity = currentSpeed;
 
     leftPaddle.position = {x: 15, y: (height / 2 - 20)};
+
     leftPaddle.move(0);
 
 
